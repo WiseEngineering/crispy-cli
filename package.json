@@ -2,9 +2,9 @@
   "name": "crispy-cli",
   "version": "0.0.1",
   "description": "CLI tool to communicate with crispy-api",
-  "main": "./out/index.js",
+  "main": "./dist/index.js",
   "bin": {
-    "crispy-cli": "./out/index.js"
+    "crispy-cli": "./dist/index.js"
   },
   "repository": "git@github.com:WiseEngineering/crispy-cli.git",
   "author": "Vitalii Melnychuk <vitali.melnychuk@gmail.com>",

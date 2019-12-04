@@ -40,7 +40,7 @@ jspm_packages/
 typings/
 
 # TypeScript build directory
-out/
+dist/
 
 # Optional npm cache directory
 .npm
