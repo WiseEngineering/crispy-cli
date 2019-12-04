@@ -1,0 +1,10 @@
+{
+  "name": "crispy-toolkit",
+  "version": "0.0.1",
+  "description": "CLI tool to communicate with crispy-api",
+  "main": "index.js",
+  "repository": "git@github.com:WiseEngineering/crispy-toolkit.git",
+  "author": "Vitalii Melnychuk <vvv.melnychuk@gmail.com>",
+  "license": "MIT",
+  "private": false
+}

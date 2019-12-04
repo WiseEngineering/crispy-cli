@@ -6,6 +6,7 @@ CLI to communicate with `crispy-api`.
 
 - NodeJS version 12
 - NVM - https://github.com/nvm-sh/nvm
+- yarn - https://github.com/yarnpkg/yarn
 
 ## Running
 
