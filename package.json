@@ -1,12 +1,12 @@
 {
-  "name": "crispy-toolkit",
+  "name": "crispy-cli",
   "version": "0.0.1",
   "description": "CLI tool to communicate with crispy-api",
   "main": "./out/index.js",
   "bin": {
-    "crispy-toolkit": "./out/index.js"
+    "crispy-cli": "./out/index.js"
   },
-  "repository": "git@github.com:WiseEngineering/crispy-toolkit.git",
+  "repository": "git@github.com:WiseEngineering/crispy-cli.git",
   "author": "Vitalii Melnychuk <vitali.melnychuk@gmail.com>",
   "license": "MIT",
   "private": false,

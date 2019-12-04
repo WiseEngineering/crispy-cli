@@ -1,4 +1,4 @@
-# crispy-toolkit
+# crispy-cli
 
 CLI to communicate with `crispy-api`.
 
