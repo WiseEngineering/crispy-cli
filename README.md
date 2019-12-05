@@ -33,7 +33,7 @@ To setup this project you have to run following commands:
 ### Running
 
 - `yarn start` Running nodemon for local development
-- `yarn build` Compile Typescript to `./out` directory
+- `yarn build` Compile Typescript to `./dist` directory
 - `yarn clean` Remove & Install dependencies
 
 ## CONTRIBUTING
