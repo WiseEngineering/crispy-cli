@@ -1,0 +1,15 @@
+version: 0.0.1
+
+up:
+  table: users
+  operation: alter
+  runner: pt-online-schema-change
+  query: >
+    add column role_id int(11)
+
+down:
+  table: users
+  operation: alter
+  runner: pt-online-schema-change
+  query: >
+    drop column role_id
