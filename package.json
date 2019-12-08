@@ -2,19 +2,19 @@
   "name": "crispy-cli",
   "version": "0.0.1",
   "description": "CLI tool to communicate with crispy-api",
-  "main": "./dist/index.js",
+  "main": "./dist/crispy-cli.js",
   "bin": {
-    "crispy-cli": "./dist/index.js"
+    "crispy-cli": "./dist/crispy-cli.js"
   },
   "repository": "git@github.com:WiseEngineering/crispy-cli.git",
   "author": "WiseEngineering open-source@wise-engineering.com",
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' ./index.ts",
+    "develop": "nodemon --watch 'src/**/*.ts' --exec 'yarn build'",
     "build": "tsc -p .",
     "clean": "rm -rf ./node_modules ./dist && yarn install",
-    "lint": "eslint src/**/*.ts ./index.ts"
+    "lint": "eslint src/**/*.ts "
   },
   "dependencies": {
     "chalk": "3.0.0",
