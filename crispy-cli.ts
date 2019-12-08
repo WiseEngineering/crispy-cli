@@ -7,4 +7,5 @@ commander
   .version(version)
   .description(description)
   .command('migrations', 'Operate with Crispy migrations').alias('m')
-  .parse(process.argv)
+
+commander.parse(process.argv)
