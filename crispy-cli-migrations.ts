@@ -8,23 +8,23 @@ import publish from './src/commands/migrations/publish'
 import create from './src/commands/migrations/create'
 
 commander
-  .command('up <migrationName>')
+  .command('up <migrationName>', 'Runs the specified migration')
   .action(up)
 
 commander
-  .command('down <migrationName>')
+  .command('down <migrationName>', 'Will undo the specified migration')
   .action(down)
 
 commander
-  .command('publish <migrationName>')
+  .command('publish <migrationName>', 'Send specified migration to server')
   .action(publish)
 
 commander
-  .command('create <migrationName>')
+  .command('create <migrationName>', 'Create new migration')
   .action(create)
 
 commander
-  .command('sync')
+  .command('sync', 'Sync migrations directory with server')
   .action(sync)
 
 commander.parse(process.argv)

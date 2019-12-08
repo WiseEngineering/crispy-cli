@@ -38,12 +38,12 @@ Options:
   -h, --help               output usage information
 
 Commands:
-  up <migrationName>
-  down <migrationName>
-  publish <migrationName>
-  create <migrationName>
-  sync
-
+  up <migrationName>       Runs the specified migration
+  down <migrationName>     Will undo the specified migration
+  publish <migrationName>  Send specified migration to server
+  create <migrationName>   Create new migration
+  sync                     Sync migrations directory with server
+  help [cmd]               display help for [cmd]
 ```
 
 ## Local setup
