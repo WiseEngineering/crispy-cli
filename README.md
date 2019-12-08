@@ -14,6 +14,38 @@ CLI to communicate with `crispy-api`.
 
 `crispy-cli --help` Shows all available commands
 
+```
+Usage: crispy-cli [options] [command]
+
+CLI tool to communicate with crispy-api
+
+Options:
+  -V, --version  output the version number
+  -h, --help     output usage information
+
+Commands:
+  migrations|m   Operate with Crispy migrations
+```
+
+### Migrations
+
+`crispy-cli migrations --help` Shows all available migrations commands`
+
+```
+Usage: crispy-cli migrations [options] [command]
+
+Options:
+  -h, --help               output usage information
+
+Commands:
+  up <migrationName>
+  down <migrationName>
+  publish <migrationName>
+  create <migrationName>
+  sync
+
+```
+
 ## Local setup
 
 ### Prerequisites
