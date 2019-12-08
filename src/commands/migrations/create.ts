@@ -18,3 +18,7 @@ down:
   query: >
 
 */
+
+export default (migrationName: string): void => {
+  console.log(`Creating migration ${migrationName} in migrations directory`)
+}
