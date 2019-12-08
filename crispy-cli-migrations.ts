@@ -24,7 +24,7 @@ commander
   .action(create)
 
 commander
-  .command('sync>')
+  .command('sync')
   .action(sync)
 
 commander.parse(process.argv)
