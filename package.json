@@ -11,7 +11,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "develop": "nodemon --watch 'src/**/*.ts' --exec 'yarn build'",
+    "develop": "nodemon --watch 'src/**/*.ts' --ext 'ts' --exec 'yarn build'",
     "build": "tsc -p .",
     "clean": "rm -rf ./node_modules ./dist && yarn install",
     "lint": "eslint src/**/*.ts "
