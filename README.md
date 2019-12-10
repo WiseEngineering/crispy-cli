@@ -38,8 +38,8 @@ Options:
   -h, --help               output usage information
 
 Commands:
-  up <migrationName>       Runs the specified migration
-  down <migrationName>     Will undo the specified migration
+  migrate <migrationName>       Runs the specified migration
+  rollback <migrationName>     Will undo the specified migration
   create <migrationName>   Create new migration
   help [cmd]               display help for [cmd]
 ```
