@@ -40,9 +40,7 @@ Options:
 Commands:
   up <migrationName>       Runs the specified migration
   down <migrationName>     Will undo the specified migration
-  publish <migrationName>  Send specified migration to server
   create <migrationName>   Create new migration
-  sync                     Sync migrations directory with server
   help [cmd]               display help for [cmd]
 ```
 
