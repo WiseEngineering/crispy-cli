@@ -1,8 +1,8 @@
 // TODO: import from mysql library
 type MysqlConnection = {}
 
-type CrispyServer = {
-  url: string
+type CrispyAPI = {
+  url: string,
   apiKey: string
 }
 
@@ -10,7 +10,7 @@ export type Config = {
   tableName: string,
   migrationsDir: string,
   mysqlConnection: MysqlConnection | null,
-  crispyServer: CrispyServer | null
+  crispyServer: CrispyAPI | null
 }
 
 //TODO: get config from users directory
