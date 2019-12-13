@@ -12,7 +12,7 @@ export default (migrationName: string): void => {
     .then(closeConnection)
     .catch(err => {
       console.log(err)
-      return deleteMigration(migrationName)
+      deleteMigration(migrationName)
         .then(closeConnection)
     })
 }
