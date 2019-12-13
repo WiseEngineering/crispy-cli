@@ -8,3 +8,8 @@ export const query = (sql: string) => (
     )
   )
 )
+
+export const esc = (value: string | number) => getConnection().escape(value)
+
+export const formatDate = (date: Date) =>
+  esc(date.toISOString().slice(0, 19).replace('T', ' '));
