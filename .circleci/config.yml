@@ -7,6 +7,9 @@ jobs:
     working_directory: ~/crispy
     steps:
       - checkout
+      - run:
+        name: Update Yarn version
+        command: curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
       - restore_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}
       - run:
