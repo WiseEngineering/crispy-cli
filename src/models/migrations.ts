@@ -23,6 +23,11 @@ export const initTable = () => query(`
 
 export const startMigration = (migrationName: string) => query(`
   INSERT INTO ${tableName} (name, started_at)
-  VALUES (${esc(migrationName)}, ${formatDate(new Date())})
+    VALUES (${esc(migrationName)}, ${formatDate(new Date())})
 `)
 
+export const finishMigration = (migrationName: string) => query(`
+  UPDATE ${tableName}
+    SET finished_at=${formatDate(new Date())}
+    WHERE name=${esc(migrationName)}
+`)

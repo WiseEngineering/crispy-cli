@@ -1,5 +1,5 @@
 //Run next migration or specified one
-import { initTable, startMigration } from './../../models/migrations'
+import { initTable, startMigration, finishMigration} from './../../models/migrations'
 import { createConnection, closeConnection } from '../../mysql'
 
 export default (migrationName: string): void => {
@@ -7,9 +7,11 @@ export default (migrationName: string): void => {
 
   initTable()
     .then(() => startMigration(migrationName))
-    .then(() => console.log(`migrate to ${migrationName}`))
+    .then(() => console.log(`running ${migrationName} migration query`))
+    .then(() => finishMigration(migrationName))
     .then(closeConnection)
     .catch(err => {
+
       console.log(err)
       closeConnection()
     })
