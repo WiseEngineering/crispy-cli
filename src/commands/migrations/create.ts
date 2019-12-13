@@ -1,24 +1,29 @@
+import fs from 'fs'
+import yaml from 'js-yaml'
 
-// NOTE should store code to create file in migrations directory based on config with following structure:
-
-/*
-version: [version]
-
-up:
-  table: [table]
-  operation: [create|alter]
-  runner: [mysql|pt-online-schema-change]
-  query: >
-
-
-down:
-  table: [table]
-  operation: [create|alter]
-  runner: [mysql|pt-online-schema-change]
-  query: >
-
-*/
+import config from '../../config'
+import { Schema } from '../../migration'
+const version = 1.0
+const migrationTemplate = {
+  table: '',
+  operation: '',
+  query: ''
+}
+const schemaTemplate = <Schema>{
+  version,
+  up: migrationTemplate,
+  down: migrationTemplate
+};
 
 export default (migrationName: string): void => {
-  console.log(`Creating migration ${migrationName} in migrations directory`)
+  const migrationPath = `${config.migrationsDir}/${migrationName}.yml`;
+
+  if (fs.existsSync(migrationPath)) {
+    console.error(`${migrationName} is already exist`)
+  } else {
+    const yamlSchemaTemplate = yaml.safeDump(schemaTemplate, { noRefs: true });
+    fs.writeFileSync(migrationPath, yamlSchemaTemplate, 'utf8');
+
+    console.log(`Created migration ${migrationName} in ${config.migrationsDir} directory`)
+  }
 }
