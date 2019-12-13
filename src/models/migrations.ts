@@ -31,3 +31,8 @@ export const finishMigration = (migrationName: string) => query(`
     SET finished_at=${formatDate(new Date())}
     WHERE name=${esc(migrationName)}
 `)
+
+export const deleteMigration = (migrationName: string) => query(`
+  DELETE FROM ${tableName}
+  WHERE name=${esc(migrationName)}
+`)
