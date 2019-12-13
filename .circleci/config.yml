@@ -8,9 +8,8 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Update Yarn version
-        command: >
-          curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
+        name: Install yarn 1.21.1
+        command: sudo npm install -g yarn@1.21.1
       - restore_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}
       - run:
