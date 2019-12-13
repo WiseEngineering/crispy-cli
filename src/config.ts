@@ -13,7 +13,7 @@ export type Config = {
 }
 
 //TODO: get config from users directory
-// TODO: use env variables for mysql password
+//TODO: use env variables for mysql password
 const usersDirectory = {
   mysqlConnection: {
     host: 'localhost',
