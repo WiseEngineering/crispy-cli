@@ -1,0 +1,15 @@
+version: 2
+
+jobs:
+  lint:
+    docker:
+      - image: circleci/node:12.4.0
+    working_directory: ~/crispy
+    steps:
+      - checkout
+      - run: yarn lint
+
+workflows:
+  build_and_test:
+    jobs:
+      - lint
