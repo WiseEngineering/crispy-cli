@@ -25,6 +25,8 @@ jobs:
     working_directory: ~/crispy
     steps:
       - checkout
+      - restore_cache:
+        key: dependency-cache-{{ checksum "yarn.lock" }}
       - run: yarn lint
 
 workflows:
