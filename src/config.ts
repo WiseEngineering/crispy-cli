@@ -8,10 +8,8 @@ type CrispyAPI = {
 export type Config = {
   tableName: string,
   migrationsDir: string,
-  // Now, database connection is required in config. Need to think about user cases and consider about allowing it nullable as well
-  // mysqlConnection: ConnectionConfig | string | null,
-  mysqlConnection: ConnectionConfig | string,
-  crispyServer: CrispyAPI | null
+  mysqlConnection?: ConnectionConfig | string,
+  crispyServer?: CrispyAPI
 }
 
 //TODO: get config from users directory
