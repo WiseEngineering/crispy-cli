@@ -2,14 +2,14 @@ import fs from 'fs'
 import yaml from 'js-yaml'
 
 import config from '../../config'
-import { Schema } from '../../migration'
+
 const version = 1.0
 const migrationTemplate = {
-  table: '',
-  operation: '',
-  query: ''
+  table: null,
+  operation: null,
+  query: null
 }
-const schemaTemplate = <Schema>{
+const schemaTemplate = {
   version,
   up: migrationTemplate,
   down: migrationTemplate
@@ -21,7 +21,13 @@ export default (migrationName: string): void => {
   if (fs.existsSync(migrationPath)) {
     console.error(`${migrationName} is already exist`)
   } else {
-    const yamlSchemaTemplate = yaml.safeDump(schemaTemplate, { noRefs: true });
+    const schemaConfig = {
+      noRefs: true,
+      styles: {
+        '!!null': 'canonical'
+      },
+    };
+    const yamlSchemaTemplate = yaml.safeDump(schemaTemplate, schemaConfig);
     fs.writeFileSync(migrationPath, yamlSchemaTemplate, 'utf8');
 
     console.log(`Created migration ${migrationName} in ${config.migrationsDir} directory`)
