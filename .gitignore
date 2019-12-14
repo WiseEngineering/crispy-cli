@@ -65,3 +65,6 @@ dist/
 
 # test migrations directory
 /migrations
+
+# Crispy configuration, should be stored in users directory
+crispy.js

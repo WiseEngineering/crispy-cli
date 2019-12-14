@@ -5,7 +5,7 @@ import config from './config'
 let mysqlConnection: Connection;
 
 export const createConnection = () => {
-  if (!mysqlConnection)
+  if (!mysqlConnection && config.mysqlConnection)
     mysqlConnection = mysql.createConnection(config.mysqlConnection)
 };
 
