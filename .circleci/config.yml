@@ -28,6 +28,15 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "yarn.lock" }}
       - run: yarn lint
+  test:
+    docker:
+      - image: circleci/node:12.4.0
+     working_directory: ~/crispy
+    steps:
+      - checkout
+      - restore_cache:
+            key: dependency-cache-{{ checksum "yarn.lock" }}
+      - run: yarn test
   publish:
     docker:
       - image: circleci/node:12.4.0
@@ -46,9 +55,13 @@ workflows:
   build_and_test:
     jobs:
       - build
+      - test:
+          requires:
+            - build
       - lint:
           requires:
             - build
       - publish:
           requires:
             - lint
+            - test
