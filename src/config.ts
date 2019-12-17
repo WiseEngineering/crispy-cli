@@ -1,4 +1,7 @@
 import { ConnectionConfig } from 'mysql'
+import fs from 'fs'
+
+const usersDirectoryConfigPath = `${process.cwd()}/crispy.js`
 
 type CrispyAPI = {
   url: string,
@@ -9,18 +12,13 @@ export type Config = {
   tableName: string,
   migrationsDir: string,
   mysqlConnection?: ConnectionConfig | string,
-  crispyServer?: CrispyAPI
+  CrispyAPI?: CrispyAPI
 }
 
-//TODO: get config from users directory
-//TODO: use env variables for mysql password
-const usersDirectory = {
-  mysqlConnection: {
-    host: 'localhost',
-    user: 'root',
-    password: '123root123',
-    database: 'crispy'
-  }
+let usersDirectoryConfig = {}
+
+if (fs.existsSync(usersDirectoryConfigPath)) {
+  usersDirectoryConfig = require(usersDirectoryConfigPath)
 }
 
 const defaultConfig = <Config>{
@@ -29,4 +27,4 @@ const defaultConfig = <Config>{
 
 }
 
-export default { ...defaultConfig, ...usersDirectory }
+export default { ...defaultConfig, ...usersDirectoryConfig }

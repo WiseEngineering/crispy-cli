@@ -10,6 +10,24 @@ CLI to communicate with `crispy-api`.
     npm i -g crispy-cli
 ```
 
+### Configuration
+
+To specify your own configuration you could use `crispy.js` config file.
+
+| field           | type                   | Description                                       |
+| --------------- | ---------------------- | ------------------------------------------------- |
+| tableName       | string                 | table name where migrations would be stored       |
+| migrationsDir   | string                 | directory to store all migrations files           |
+| mysqlConnection | MysqlConnection/string | mysql connection based on docs from mysql library |
+| CrispyAPI       | CrispyAPI              | Crispy API configuration                          |
+
+Crispy API configuration
+
+| field  | type   | Description                                   |
+| ------ | ------ | --------------------------------------------- |
+| url    | string | url to your crispy api server                 |
+| apiKey | string | api key to your api server to have basic auth |
+
 ### Running
 
 `crispy-cli --help` Shows all available commands
