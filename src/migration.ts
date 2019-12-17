@@ -20,3 +20,7 @@ export const getPath = (migrationName: string): string =>
 export const isExist = (migrationName: string): boolean =>
   fs.existsSync(getPath(migrationName))
 
+export default {
+  getPath,
+  isExist
+}
