@@ -1,20 +1,23 @@
 #!/usr/bin/env node
-import commander from 'commander'
+import migrations from 'commander'
 
 import migrate from './src/commands/migrations/migrate'
 import rollback from './src/commands/migrations/rollback'
 import create from './src/commands/migrations/create'
 
-commander
-  .command('create <migrationName>', 'Create new migration')
-  .action(create)
-
-commander
-  .command('migrate <migrationName>', 'Runs the specified migration')
+migrations
+  .command('migrate <migrationName>')
+  .description('Runs the specified migration')
   .action(migrate)
 
-commander
-  .command('rollback <migrationName>', 'Will undo the specified migration')
+migrations
+  .command('rollback <migrationName>')
+  .description('Will undo the specified migration')
   .action(rollback)
 
-commander.parse(process.argv)
+migrations
+  .command('create <migrationName>')
+  .description('Create new migration')
+  .action(create)
+
+migrations.parse(process.argv);
