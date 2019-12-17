@@ -2,7 +2,7 @@ import fs from 'fs'
 import yaml from 'js-yaml'
 
 import config from '../../config'
-import { getPath, isExist } from '../../migration'
+import { getPath, isExist } from '../../migration-schema'
 
 const version = 1.0
 const migrationTemplate = {
