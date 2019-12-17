@@ -1,0 +1,54 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:12.4.0
+    working_directory: ~/crispy
+    steps:
+      - checkout
+      - run:
+          name: Install yarn 1.21.1
+          command: sudo npm install -g yarn@1.21.1
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install dependencies
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+  lint:
+    docker:
+      - image: circleci/node:12.4.0
+    working_directory: ~/crispy
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+      - run: yarn lint
+  publish:
+    docker:
+      - image: circleci/node:12.4.0
+    working_directory: ~/crispy
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+      - run: yarn build
+      # TODO: add npm publish here for master branch
+      - run:
+          name: Run publish command
+          command: echo 'Publishing ...'
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - lint:
+          requires:
+            - build
+      - publish:
+          requires:
+            - lint
