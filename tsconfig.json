@@ -7,7 +7,7 @@
     "outDir": "dist",
     "rootDir": ".",
     "strict": true,
-    "types": ["node"],
+    "types": ["node", "mocha"],
     "esModuleInterop": true,
     "resolveJsonModule": true
   }
