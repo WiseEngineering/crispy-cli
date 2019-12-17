@@ -19,6 +19,7 @@ const usersDirectory = {
     host: 'localhost',
     user: 'root',
     password: '123root123',
+    database: 'crispy'
   }
 }
 
