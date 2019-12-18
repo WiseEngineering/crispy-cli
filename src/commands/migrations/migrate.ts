@@ -20,7 +20,7 @@ export default async (migrationName: string): Promise<void> => {
 
       await finishMigration(migrationName)
 
-      await closeConnection()
+      closeConnection()
     } else {
       console.error(`migration ${migrationSchema.getPath(migrationName)} is not exist`)
     }

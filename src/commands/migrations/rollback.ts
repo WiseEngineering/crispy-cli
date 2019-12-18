@@ -1,5 +1,6 @@
 //Run next migration or specified one
 import { deleteMigration } from './../../models/migrations'
+import migrationSchema from './../../migration-schema'
 import { createConnection, closeConnection } from '../../mysql'
 
 export default async (migrationName: string): Promise<void> => {
@@ -12,9 +13,13 @@ export default async (migrationName: string): Promise<void> => {
   // * how many migrations we have to run between db migration and one we've passed
 
   try {
-    console.log(`running rollback ${migrationName} query`)
-    await deleteMigration(migrationName)
-    closeConnection()
+    if (migrationSchema.isExist(migrationName)) {
+      console.log(`running rollback ${migrationName} query`)
+      await deleteMigration(migrationName)
+      closeConnection()
+    } else {
+      console.error(`migration ${migrationSchema.getPath(migrationName)} is not exist`)
+    }
   } catch (e) {
     console.log(e)
     closeConnection()
