@@ -10,6 +10,7 @@ export default async (migrationName: string): Promise<void> => {
     // TODO: need to cover those points:
     // * is migration syntax right
     // * use migrations transaction to be sure we are in sync with running query
+    // * check with latest migration in database
     // * how many migrations we have to run between db migration and one we've passed
     if (migrationSchema.isExist(migrationName)) {
       await initTable();
