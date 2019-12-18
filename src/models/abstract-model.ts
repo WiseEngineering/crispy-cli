@@ -1,7 +1,7 @@
 import { getConnection } from '../mysql'
 
 // originally used with mysql.QueryFunction interface.
-export const query = (sql: string): Promise<object> => (
+export const query = async (sql: string): Promise<object> => (
   new Promise((resolve, reject) =>
     getConnection().query(sql, (error, results) =>
       error ? reject(error) : resolve(results)
