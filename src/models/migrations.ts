@@ -10,7 +10,7 @@ type Migration = {
 };
 const tableName = config.migrationsDir;
 
-export const initTable = (): Promise<object> => query(`
+export const initTable = async (): Promise<object> => query(`
   CREATE TABLE IF NOT EXISTS ${tableName} (
     id INT NOT NULL AUTO_INCREMENT,
     name CHAR(255) NOT NULL UNIQUE,
@@ -21,18 +21,18 @@ export const initTable = (): Promise<object> => query(`
 `);
 
 // TODO: map response with `Migration` type. Use that type instead of object
-export const startMigration = (migrationName: string): Promise<object> => query(`
+export const startMigration = async (migrationName: string): Promise<object> => query(`
   INSERT INTO ${tableName} (name, started_at)
     VALUES (${esc(migrationName)}, ${formatDate(new Date())})
 `);
 
-export const finishMigration = (migrationName: string): Promise<object> => query(`
+export const finishMigration = async (migrationName: string): Promise<object> => query(`
   UPDATE ${tableName}
     SET finished_at=${formatDate(new Date())}
     WHERE name=${esc(migrationName)}
 `);
 
-export const deleteMigration = (migrationName: string): Promise<object> => query(`
+export const deleteMigration = async (migrationName: string): Promise<object> => query(`
   DELETE FROM ${tableName}
   WHERE name=${esc(migrationName)}
 `);
