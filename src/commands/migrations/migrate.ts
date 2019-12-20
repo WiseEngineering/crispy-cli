@@ -1,8 +1,26 @@
 //Run next migration or specified one
-import { initTable, startMigration, finishMigration, deleteMigration } from './../../models/migrations'
+import { initTable, startMigration, finishMigration, deleteMigration, getLastMigration } from './../../models/migrations'
 import { createConnection, closeConnection } from '../../mysql'
 import migrationSchema from '../../migration-schema'
-import { run, rollback } from '../../runner'
+import { run } from '../../runner'
+
+const runMigrations = async (migrationsToRun: string[]): Promise<void> => {
+  for (const migrationName of migrationsToRun) {
+    try {
+      await startMigration(migrationName);
+
+      await run(migrationName);
+      console.log(`running migrate ${migrationName} query`)
+
+      await finishMigration(migrationName)
+    } catch (e) {
+      console.log('running migration', e)
+      await deleteMigration(migrationName)
+      break
+    }
+
+  }
+}
 
 export default async (migrationName: string): Promise<void> => {
   try {
@@ -11,28 +29,24 @@ export default async (migrationName: string): Promise<void> => {
     // TODO: need to cover those points:
     // * is migration syntax right
     // * use migrations transaction to be sure we are in sync with running query
-    // * check with latest migration in database
-    // * how many migrations we have to run between db migration and one we've passed
     if (migrationSchema.isExist(migrationName)) {
       await initTable();
 
-      await startMigration(migrationName);
+      const lastMigration = await getLastMigration()
 
-      await run(migrationName);
+      const migrationsToRun = migrationSchema.getMigrationsToRun(
+        lastMigration ? lastMigration.name : null,
+        migrationName)
 
-      console.log(`running migrate ${migrationName} query`)
+      await runMigrations(migrationsToRun)
 
-      await finishMigration(migrationName)
-
-      closeConnection()
     } else {
       console.error(`migration ${migrationSchema.getPath(migrationName)} is not exist`)
     }
   } catch (e) {
     // TODO: add logging module
     console.error(e)
-    await deleteMigration(migrationName)
+  } finally {
     closeConnection()
   }
-
 }
