@@ -2,10 +2,12 @@
 import { deleteMigration, getLastMigration } from './../../models/migrations'
 import migrationSchema from './../../migration-schema'
 import { createConnection, closeConnection } from '../../mysql'
+import { rollback } from '../../runner'
 
 const runMigrations = async (migrationsToRun: string[]): Promise<void> => {
   for (const migrationName of migrationsToRun) {
-    // TODO: change with runner
+
+    await rollback(migrationName);
     console.log(`running migrate ${migrationName} query`)
 
     await deleteMigration(migrationName)

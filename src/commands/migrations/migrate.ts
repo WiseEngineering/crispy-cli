@@ -2,13 +2,14 @@
 import { initTable, startMigration, finishMigration, deleteMigration, getLastMigration } from './../../models/migrations'
 import { createConnection, closeConnection } from '../../mysql'
 import migrationSchema from '../../migration-schema'
+import { run } from '../../runner'
 
 const runMigrations = async (migrationsToRun: string[]): Promise<void> => {
   for (const migrationName of migrationsToRun) {
     try {
       await startMigration(migrationName);
 
-      // TODO: change with runner
+      await run(migrationName);
       console.log(`running migrate ${migrationName} query`)
 
       await finishMigration(migrationName)

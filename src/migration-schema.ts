@@ -1,4 +1,6 @@
 import fs from 'fs'
+import yaml from 'js-yaml'
+
 import { parse } from 'path'
 
 import config from './config'
@@ -22,6 +24,13 @@ export const getPath = (migrationName: string): string =>
 export const isExist = (migrationName: string): boolean =>
   fs.existsSync(getPath(migrationName))
 
+const getMigrationSchema = async (migrationName: string): Promise<object> =>
+  fs.readFileSync(getPath(migrationName));
+
+export const parseMigrationSchema = async (migrationName: string): Promise<Schema> => {
+  const config = await getMigrationSchema(migrationName);
+  return yaml.safeLoad(String(config));
+}
 /*
   Returns list of available migrations could be run based on current one
   Returns all migrations once there is no current migration
