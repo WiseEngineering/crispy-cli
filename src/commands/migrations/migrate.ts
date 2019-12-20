@@ -18,13 +18,7 @@ export default async (migrationName: string): Promise<void> => {
 
       await startMigration(migrationName);
 
-      try {
-        await run(migrationName);
-      } catch (e) {
-
-        console.log(`running migration ${migrationName} failed`)
-        await rollback(migrationName);
-      }
+      await run(migrationName);
 
       console.log(`running migrate ${migrationName} query`)
 
