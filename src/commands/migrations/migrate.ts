@@ -2,6 +2,7 @@
 import { initTable, startMigration, finishMigration, deleteMigration } from './../../models/migrations'
 import { createConnection, closeConnection } from '../../mysql'
 import migrationSchema from '../../migration-schema'
+import { run, rollback } from '../../runner/runner'
 
 export default async (migrationName: string): Promise<void> => {
   try {
@@ -16,6 +17,14 @@ export default async (migrationName: string): Promise<void> => {
       await initTable();
 
       await startMigration(migrationName);
+
+      try {
+        await run(migrationName);
+      } catch (e) {
+        
+        console.log(`running migration ${migrationName} failed`)
+        await rollback(migrationName);
+      }
 
       console.log(`running migrate ${migrationName} query`)
 

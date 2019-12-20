@@ -6,6 +6,7 @@ const { migrationsDir } = config
 export type MigrationSchema = {
   table: string;
   operation: string;
+  runner: string;
   query: string;
 }
 
