@@ -77,7 +77,7 @@ const getAvailableMigrationsToRollback = (currentMigrationName: string | null): 
 */
 export const getMigrationsToRollback = (currentMigrationName: string | null, migrationToRun: string): string[] => {
   const availableMigrations = getAvailableMigrationsToRollback(currentMigrationName);
-  console.log(availableMigrations)
+
   const migrationToRollbackIndex = availableMigrations.findIndex(migration => migration == migrationToRun)
 
   if (migrationToRollbackIndex < 0)
