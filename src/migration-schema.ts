@@ -92,7 +92,8 @@ export const getMigrationsToRollback = (currentMigrationName: string | null, mig
   if (migrationToRollbackIndex < 0)
     throw new Error(`There is no upcoming migration. Current migration: ${currentMigrationName}`)
 
-  return availableMigrations.slice(migrationToRollbackIndex + 1).reverse()
+  // responds with migrations should be run including passed one
+  return availableMigrations.slice(migrationToRollbackIndex).reverse()
 }
 
 export default {
