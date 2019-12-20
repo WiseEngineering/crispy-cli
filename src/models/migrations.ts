@@ -10,6 +10,7 @@ type Migration = {
 };
 const tableName = config.migrationsDir;
 
+// TODO: convert all mysql RowData into Migration type
 export const initTable = async (): Promise<object> => query(`
   CREATE TABLE IF NOT EXISTS ${tableName} (
     id INT NOT NULL AUTO_INCREMENT,
@@ -36,3 +37,7 @@ export const deleteMigration = async (migrationName: string): Promise<object> =>
   DELETE FROM ${tableName}
   WHERE name=${esc(migrationName)}
 `);
+
+export const getLastMigration = async (): Promise<Migration | null> => query(`
+  SELECT * FROM ${tableName} ORDER BY id DESC LIMIT 1;`)
+  .then(res => res[0] ? res[0] as Migration : null);

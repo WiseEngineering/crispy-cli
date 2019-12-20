@@ -1,7 +1,20 @@
 //Run next migration or specified one
-import { initTable, startMigration, finishMigration, deleteMigration } from './../../models/migrations'
+import { initTable, startMigration, finishMigration, deleteMigration, getLastMigration } from './../../models/migrations'
 import { createConnection, closeConnection } from '../../mysql'
 import migrationSchema from '../../migration-schema'
+
+const runMigrations = async (migrationsToRun: string[]): Promise<void> => {
+
+  migrationsToRun.forEach(async migrationName => {
+    await startMigration(migrationName);
+
+    // TODO: change with runner
+    console.log(`running migrate ${migrationName} query`)
+
+    await finishMigration(migrationName)
+  })
+}
+
 
 export default async (migrationName: string): Promise<void> => {
   try {
@@ -15,13 +28,16 @@ export default async (migrationName: string): Promise<void> => {
     if (migrationSchema.isExist(migrationName)) {
       await initTable();
 
-      await startMigration(migrationName);
+      const lastMigration = await getLastMigration()
 
-      console.log(`running migrate ${migrationName} query`)
+      const migrationsToRun = migrationSchema.getMigrationsToRun(
+        lastMigration ? lastMigration.name : null,
+        migrationName)
 
-      await finishMigration(migrationName)
+      await runMigrations(migrationsToRun)
 
       closeConnection()
+
     } else {
       console.error(`migration ${migrationSchema.getPath(migrationName)} is not exist`)
     }
