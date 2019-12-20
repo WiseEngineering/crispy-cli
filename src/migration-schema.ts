@@ -23,17 +23,32 @@ export const isExist = (migrationName: string): boolean =>
   fs.existsSync(getPath(migrationName))
 
 /*
-Returns list of migrations should be run based on current migration version
+  Returns list of available migrations could be run
 */
-export const getMigrationsToRun = (currentMigrationName: string): string[] => {
+const getAvailableMigrationsToRun = (currentMigrationName: string): string[] => {
   const migrations = fs.readdirSync(migrationsDir).map(migration => parse(migration).name);
 
   const currentMigrationIndex = migrations.findIndex(migration => migration == currentMigrationName)
-  if (!currentMigrationIndex)
+
+  if (currentMigrationIndex < 0)
     throw new Error(`cannot find migration ${currentMigrationName} in migrations directory`)
-  // Need to increase index into 2 steps: 1 - currentMigrationIndex index from 0,
-  // the second one - we have to respond with next to current migration
-  return migrations.slice(currentMigrationIndex + 2)
+
+  // we have to respond with next to current migration
+  return migrations.slice(currentMigrationIndex + 1)
+}
+
+/*
+  Returns list of available migrations should be run based on passed one
+*/
+export const getMigrationsToRun = (currentMigrationName: string, migrationToRun: string): string[] => {
+  const availableMigrations = getAvailableMigrationsToRun(currentMigrationName);
+
+  const migrationToRunIndex = availableMigrations.findIndex(migration => migration == migrationToRun)
+
+  if (migrationToRunIndex < 0)
+    throw new Error(`There is no upcoming migration. Current migration: ${currentMigrationName}`)
+
+  return availableMigrations.slice(0, migrationToRunIndex + 1)
 }
 
 export default {
