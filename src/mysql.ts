@@ -9,8 +9,6 @@ export const createConnection = (): void => {
     mysqlConnection = mysql.createConnection(config.mysqlConnection)
 }
 
-export const getConnection = (): Connection =>
-  mysqlConnection
+export const getConnection = (): Connection => mysqlConnection
 
-export const closeConnection = (): void =>
-  mysqlConnection.end()
+export const closeConnection = (): void => mysqlConnection.end()
