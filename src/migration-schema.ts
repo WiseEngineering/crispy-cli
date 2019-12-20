@@ -69,7 +69,7 @@ const getAvailableMigrationsToRollback = (currentMigrationName: string | null): 
     throw new Error(`cannot find migration ${currentMigrationName} in migrations directory`)
 
   // we have to respond with previous to current migration
-  return migrations.slice(0, currentMigrationIndex - 1)
+  return migrations.slice(0, currentMigrationIndex + 1)
 }
 
 /*
@@ -77,13 +77,13 @@ const getAvailableMigrationsToRollback = (currentMigrationName: string | null): 
 */
 export const getMigrationsToRollback = (currentMigrationName: string | null, migrationToRun: string): string[] => {
   const availableMigrations = getAvailableMigrationsToRollback(currentMigrationName);
-
+  console.log(availableMigrations)
   const migrationToRollbackIndex = availableMigrations.findIndex(migration => migration == migrationToRun)
 
   if (migrationToRollbackIndex < 0)
     throw new Error(`There is no upcoming migration. Current migration: ${currentMigrationName}`)
 
-  return availableMigrations.slice(migrationToRollbackIndex).reverse()
+  return availableMigrations.slice(migrationToRollbackIndex + 1).reverse()
 }
 
 export default {
