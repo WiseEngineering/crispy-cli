@@ -1,5 +1,4 @@
-
-import { query, esc, formatDate } from './abstract-model'
+import { query, esc, formatDate } from './../mysql'
 import config from '../config'
 
 type Migration = {
@@ -8,6 +7,7 @@ type Migration = {
   started_at: Date;
   finished_at: Date;
 };
+
 const tableName = config.migrationsDir;
 
 // TODO: convert all mysql RowData into Migration type

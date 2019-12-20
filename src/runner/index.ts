@@ -1,5 +1,5 @@
 import { parseMigrationSchema } from '../migration-schema'
-import { query } from '../models/abstract-model'
+import { query } from '../mysql'
 
 // TODO: need to cover those points:
 // * create array with avalible runners
