@@ -19,7 +19,7 @@ export const initTable = async (): Promise<object> => query(`
     finished_at DATETIME NULL,
     PRIMARY KEY (id)
   ) ENGINE=InnoDB;
-`);
+`)
 
 // TODO: map response with `Migration` type. Use that type instead of object
 export const startMigration = async (migrationName: string): Promise<object> => query(`
@@ -31,7 +31,7 @@ export const finishMigration = async (migrationName: string): Promise<object> =>
   UPDATE ${tableName}
     SET finished_at=${formatDate(new Date())}
     WHERE name=${esc(migrationName)}
-`);
+`)
 
 export const deleteMigration = async (migrationName: string): Promise<object> => query(`
   DELETE FROM ${tableName}
@@ -40,4 +40,4 @@ export const deleteMigration = async (migrationName: string): Promise<object> =>
 
 export const getLastMigration = async (): Promise<Migration | null> => query(`
   SELECT * FROM ${tableName} ORDER BY id DESC LIMIT 1;`)
-  .then(res => res[0] ? res[0] as Migration : null);
+  .then(res => res[0] ? res[0] as Migration : null)

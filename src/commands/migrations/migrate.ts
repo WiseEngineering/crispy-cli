@@ -4,17 +4,15 @@ import { createConnection, closeConnection } from '../../mysql'
 import migrationSchema from '../../migration-schema'
 
 const runMigrations = async (migrationsToRun: string[]): Promise<void> => {
-
-  migrationsToRun.forEach(async migrationName => {
+  for (const migrationName of migrationsToRun) {
     await startMigration(migrationName);
 
     // TODO: change with runner
     console.log(`running migrate ${migrationName} query`)
 
     await finishMigration(migrationName)
-  })
+  }
 }
-
 
 export default async (migrationName: string): Promise<void> => {
   try {
@@ -23,8 +21,6 @@ export default async (migrationName: string): Promise<void> => {
     // TODO: need to cover those points:
     // * is migration syntax right
     // * use migrations transaction to be sure we are in sync with running query
-    // * check with latest migration in database
-    // * how many migrations we have to run between db migration and one we've passed
     if (migrationSchema.isExist(migrationName)) {
       await initTable();
 
@@ -36,8 +32,6 @@ export default async (migrationName: string): Promise<void> => {
 
       await runMigrations(migrationsToRun)
 
-      closeConnection()
-
     } else {
       console.error(`migration ${migrationSchema.getPath(migrationName)} is not exist`)
     }
@@ -45,7 +39,7 @@ export default async (migrationName: string): Promise<void> => {
     // TODO: add logging module
     console.error(e)
     await deleteMigration(migrationName)
+  } finally {
     closeConnection()
   }
-
 }
