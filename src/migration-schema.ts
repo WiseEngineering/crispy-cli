@@ -54,8 +54,41 @@ export const getMigrationsToRun = (currentMigrationName: string | null, migratio
   return availableMigrations.slice(0, migrationToRunIndex + 1)
 }
 
+/*
+  Returns list of available migrations could be run based on current one
+  throws error once there is no current migration
+*/
+const getAvailableMigrationsToRollback = (currentMigrationName: string | null): string[] => {
+  const migrations = fs.readdirSync(migrationsDir).map(migration => parse(migration).name);
+  if (migrations.length == 0 || currentMigrationName === null )
+    throw new Error('there are any migrations to rollback ')
+
+  const currentMigrationIndex = migrations.findIndex(migration => migration == currentMigrationName)
+
+  if (currentMigrationIndex < 0)
+    throw new Error(`cannot find migration ${currentMigrationName} in migrations directory`)
+
+  // we have to respond with previous to current migration
+  return migrations.slice(0, currentMigrationIndex - 1)
+}
+
+/*
+  Returns list of available migrations should be run based on passed one
+*/
+export const getMigrationsToRollback = (currentMigrationName: string | null, migrationToRun: string): string[] => {
+  const availableMigrations = getAvailableMigrationsToRollback(currentMigrationName);
+
+  const migrationToRollbackIndex = availableMigrations.findIndex(migration => migration == migrationToRun)
+
+  if (migrationToRollbackIndex < 0)
+    throw new Error(`There is no upcoming migration. Current migration: ${currentMigrationName}`)
+
+  return availableMigrations.slice(migrationToRollbackIndex).reverse()
+}
+
 export default {
   getPath,
   isExist,
-  getMigrationsToRun
+  getMigrationsToRun,
+  getMigrationsToRollback
 }
