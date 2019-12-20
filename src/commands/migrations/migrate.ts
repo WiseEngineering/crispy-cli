@@ -5,12 +5,19 @@ import migrationSchema from '../../migration-schema'
 
 const runMigrations = async (migrationsToRun: string[]): Promise<void> => {
   for (const migrationName of migrationsToRun) {
-    await startMigration(migrationName);
+    try {
+      await startMigration(migrationName);
 
-    // TODO: change with runner
-    console.log(`running migrate ${migrationName} query`)
+      // TODO: change with runner
+      console.log(`running migrate ${migrationName} query`)
 
-    await finishMigration(migrationName)
+      await finishMigration(migrationName)
+    } catch (e) {
+      console.log('running migration', e)
+      await deleteMigration(migrationName)
+      break
+    }
+
   }
 }
 
@@ -38,7 +45,6 @@ export default async (migrationName: string): Promise<void> => {
   } catch (e) {
     // TODO: add logging module
     console.error(e)
-    await deleteMigration(migrationName)
   } finally {
     closeConnection()
   }
