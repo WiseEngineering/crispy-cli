@@ -20,4 +20,4 @@ migrations
   .description('Create new migration')
   .action(create)
 
-migrations.parse(process.argv);
+migrations.parse(process.argv)

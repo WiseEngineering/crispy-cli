@@ -6,9 +6,9 @@ type Migration = {
   name: string;
   started_at: Date;
   finished_at: Date;
-};
+}
 
-const tableName = config.migrationsDir;
+const tableName = config.migrationsDir
 
 // TODO: convert all mysql RowData into Migration type
 export const initTable = async (): Promise<object> => query(`
@@ -25,7 +25,7 @@ export const initTable = async (): Promise<object> => query(`
 export const startMigration = async (migrationName: string): Promise<object> => query(`
   INSERT INTO ${tableName} (name, started_at)
     VALUES (${esc(migrationName)}, ${formatDate(new Date())})
-`);
+`)
 
 export const finishMigration = async (migrationName: string): Promise<object> => query(`
   UPDATE ${tableName}
@@ -36,7 +36,7 @@ export const finishMigration = async (migrationName: string): Promise<object> =>
 export const deleteMigration = async (migrationName: string): Promise<object> => query(`
   DELETE FROM ${tableName}
   WHERE name=${esc(migrationName)}
-`);
+`)
 
 export const getLastMigration = async (): Promise<Migration | null> => query(`
   SELECT * FROM ${tableName} ORDER BY id DESC LIMIT 1;`)

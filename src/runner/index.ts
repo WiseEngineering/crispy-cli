@@ -7,11 +7,11 @@ import { query } from '../mysql'
 // * validate query syntax
 
 export const run = async (migrationName: string): Promise<object> => {
-  const { up: { query: sql } } = await parseMigrationSchema(migrationName);
-  return query(sql);
+  const { up: { query: sql } } = await parseMigrationSchema(migrationName)
+  return query(sql)
 }
 
 export const rollback = async (migrationName: string): Promise<object> => {
-  const { down: { query: sql } } = await parseMigrationSchema(migrationName);
-  return query(sql);
+  const { down: { query: sql } } = await parseMigrationSchema(migrationName)
+  return query(sql)
 }
