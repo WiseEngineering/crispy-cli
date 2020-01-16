@@ -14,7 +14,7 @@ const schemaTemplate = {
   version,
   up: migrationTemplate,
   down: migrationTemplate
-};
+}
 
 export default (migrationName: string): void => {
   const time = new Date().getTime()
@@ -25,12 +25,12 @@ export default (migrationName: string): void => {
     styles: {
       '!!null': 'canonical'
     },
-  };
+  }
 
-  const yamlSchemaTemplate = yaml.safeDump(schemaTemplate, schemaConfig);
+  const yamlSchemaTemplate = yaml.safeDump(schemaTemplate, schemaConfig)
   fs.writeFileSync(
     getPath(fullMigrationName),
-    yamlSchemaTemplate, 'utf8');
+    yamlSchemaTemplate, 'utf8')
 
   console.log(`Created migration ${fullMigrationName} in ${config.migrationsDir} directory`)
 }

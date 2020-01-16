@@ -19,26 +19,26 @@ export type Schema = {
   down: MigrationSchema;
 }
 export const getPath = (migrationName: string): string =>
-  `${migrationsDir}/${migrationName}.yml`;
+  `${migrationsDir}/${migrationName}.yml`
 
 export const isExist = (migrationName: string): boolean =>
   fs.existsSync(getPath(migrationName))
 
 const getMigrationSchema = async (migrationName: string): Promise<object> =>
-  fs.readFileSync(getPath(migrationName));
+  fs.readFileSync(getPath(migrationName))
 
 export const parseMigrationSchema = async (migrationName: string): Promise<Schema> => {
-  const config = await getMigrationSchema(migrationName);
-  return yaml.safeLoad(String(config));
+  const config = await getMigrationSchema(migrationName)
+  return yaml.safeLoad(String(config))
 }
 /*
   Returns list of available migrations could be run based on current one
   Returns all migrations once there is no current migration
 */
 const getAvailableMigrationsToRun = (currentMigrationName: string | null): string[] => {
-  const migrations = fs.readdirSync(migrationsDir).map(migration => parse(migration).name);
+  const migrations = fs.readdirSync(migrationsDir).map(migration => parse(migration).name)
   if(currentMigrationName === null)
-    return migrations;
+    return migrations
 
   const currentMigrationIndex = migrations.findIndex(migration => migration == currentMigrationName)
 
@@ -53,7 +53,7 @@ const getAvailableMigrationsToRun = (currentMigrationName: string | null): strin
   Returns list of available migrations should be run based on passed one
 */
 export const getMigrationsToRun = (currentMigrationName: string | null, migrationToRun: string): string[] => {
-  const availableMigrations = getAvailableMigrationsToRun(currentMigrationName);
+  const availableMigrations = getAvailableMigrationsToRun(currentMigrationName)
 
   const migrationToRunIndex = availableMigrations.findIndex(migration => migration == migrationToRun)
 
@@ -68,7 +68,7 @@ export const getMigrationsToRun = (currentMigrationName: string | null, migratio
   throws error once there is no current migration
 */
 const getAvailableMigrationsToRollback = (currentMigrationName: string | null): string[] => {
-  const migrations = fs.readdirSync(migrationsDir).map(migration => parse(migration).name);
+  const migrations = fs.readdirSync(migrationsDir).map(migration => parse(migration).name)
   if (migrations.length == 0 || currentMigrationName === null )
     throw new Error('there are any migrations to rollback ')
 
@@ -85,7 +85,7 @@ const getAvailableMigrationsToRollback = (currentMigrationName: string | null): 
   Returns list of available migrations should be run based on passed one
 */
 export const getMigrationsToRollback = (currentMigrationName: string | null, migrationToRun: string): string[] => {
-  const availableMigrations = getAvailableMigrationsToRollback(currentMigrationName);
+  const availableMigrations = getAvailableMigrationsToRollback(currentMigrationName)
 
   const migrationToRollbackIndex = availableMigrations.findIndex(migration => migration == migrationToRun)
 

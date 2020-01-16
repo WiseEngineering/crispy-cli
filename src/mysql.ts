@@ -1,7 +1,7 @@
 import mysql, { Connection } from 'mysql'
 import config from './config'
 
-let mysqlConnection: Connection;
+let mysqlConnection: Connection
 
 export const createConnection = (): void => {
   if (!mysqlConnection && config.mysqlConnection)
@@ -23,4 +23,4 @@ export const query = async (sql: string): Promise<Array<object>> => (
 export const esc = (value: string | number): string => getConnection().escape(value)
 
 export const formatDate = (date: Date): string =>
-  esc(date.toISOString().slice(0, 19).replace('T', ' '));
+  esc(date.toISOString().slice(0, 19).replace('T', ' '))

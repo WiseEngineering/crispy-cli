@@ -2,7 +2,7 @@ import { parseMigrationSchema } from '../migration-schema'
 import { query } from '../mysql'
 
 // TODO: need to cover those points:
-// * create array with avalible runners
+// * create array with available runners
 // * use runner from config file
 // * validate query syntax
 

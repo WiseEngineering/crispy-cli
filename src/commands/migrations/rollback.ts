@@ -7,7 +7,7 @@ import { rollback } from '../../runner'
 const runMigrations = async (migrationsToRun: string[]): Promise<void> => {
   for (const migrationName of migrationsToRun) {
 
-    await rollback(migrationName);
+    await rollback(migrationName)
     console.log(`running migrate ${migrationName} query`)
 
     await deleteMigration(migrationName)
@@ -38,5 +38,4 @@ export default async (migrationName: string): Promise<void> => {
   } finally {
     closeConnection()
   }
-
 }
