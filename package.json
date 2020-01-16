@@ -15,7 +15,7 @@
     "build": "tsc -p .",
     "test": "mocha -r ts-node/register tests/**/*.test.ts",
     "coverage": "nyc -r lcov -e .ts -x \"*.test.ts\" yarn test",
-    "lint": "eslint *.ts src/**/*.ts tests/**/*.ts",
+    "lint": "eslint --ext .ts src tests",
     "clean": "rm -rf ./node_modules ./dist && yarn install"
   },
   "dependencies": {
