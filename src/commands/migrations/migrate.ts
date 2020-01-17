@@ -7,9 +7,9 @@ import { run } from '../../runner'
 const runMigrations = async (migrationsToRun: string[]): Promise<void> => {
   for (const migrationName of migrationsToRun) {
     try {
-      await startMigration(migrationName);
+      await startMigration(migrationName)
 
-      await run(migrationName);
+      await run(migrationName)
       console.log(`running migrate ${migrationName} query`)
 
       await finishMigration(migrationName)
@@ -30,7 +30,7 @@ export default async (migrationName: string): Promise<void> => {
     // * is migration syntax right
     // * use migrations transaction to be sure we are in sync with running query
     if (migrationSchema.isExist(migrationName)) {
-      await initTable();
+      await initTable()
 
       const lastMigration = await getLastMigration()
 
