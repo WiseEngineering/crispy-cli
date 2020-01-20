@@ -1,10 +1,10 @@
 {
   "name": "crispyctl",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "CLI tool to communicate with crispy-api",
-  "main": "./dist/crispyctl.js",
+  "main": "dist/crispyctl.js",
   "bin": {
-    "crispyctl": "./dist/crispyctl.js"
+    "crispyctl": "dist/crispyctl.js"
   },
   "repository": "git@github.com:WiseEngineering/crsipy-cli.git",
   "author": "WiseEngineering open-source@wise-engineering.com",
