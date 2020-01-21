@@ -1,4 +1,4 @@
-# crispy-cli
+# crispyctl
 
 CLI to communicate with `crispy-api`.
 
@@ -7,7 +7,7 @@ CLI to communicate with `crispy-api`.
 ### Installation
 
 ```
-    npm i -g crispy-cli
+    npm i -g crispyctl
 ```
 
 ### Configuration
@@ -30,10 +30,10 @@ Crispy API configuration
 
 ### Running
 
-`crispy-cli --help` Shows all available commands
+`crispyctl --help` Shows all available commands
 
 ```
-Usage: crispy-cli [options] [command]
+Usage: crispyctl [options] [command]
 
 CLI tool to communicate with crispy-api
 
