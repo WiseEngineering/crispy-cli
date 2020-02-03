@@ -21,10 +21,15 @@ if (fs.existsSync(usersDirectoryConfigPath)) {
   usersDirectoryConfig = require(usersDirectoryConfigPath)
 }
 
+const apiConfig = {
+  url: 'http://localhost:3000/graphql',
+  apiKey: 'lolkekcheburek'
+} as CrispyAPI
+
 const defaultConfig = {
   tableName: 'crispy_migrations',
   migrationsDir: 'migrations',
-
+  CrispyAPI: apiConfig
 } as Config
 
 export default { ...defaultConfig, ...usersDirectoryConfig }
