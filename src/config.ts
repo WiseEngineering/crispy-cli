@@ -22,7 +22,7 @@ if (fs.existsSync(usersDirectoryConfigPath)) {
 }
 
 const apiConfig = {
-  url: 'http://localhost:3000/graphql',
+  url: 'http://localhost:4444/graphql',
   apiKey: 'lolkekcheburek'
 } as CrispyAPI
 
